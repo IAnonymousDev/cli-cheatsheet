@@ -42,6 +42,48 @@ A collection of cli commands for Shell / PowerShell users
 
 # deletes the specified cloudformation stack
 </pre>
+<pre>
+<code><b>aws cloudformation list-stacks `
+	--stack-status-filter UPDATE_COMPLETE `
+	--query 'StackSummaries[?StackName==`&lt;stack-name&gt;`].StackId'</b></code>
+
+# lists all stacks under UPDATE_COMPLETE status and
+# filter the results by StackName
+</pre>
+<pre>
+<code><b>aws cloudformation delete-stack --stack-name &lt;stack-name&gt;</b></code>
+
+# deletes the specified stack
+</pre>
+
+### Configure
+<pre>
+<code><b>$Env:AWS_PROFILE="&lt;aws-profile-name&gt;"</b></code>
+
+# sets AWS_PROFILE environment variable on Windows.
+</pre>
+<pre>
+<code><b>echo $Env:AWS_PROFILE</b></code>
+
+# outputs the value of AWS_PROFILE environment variable on Windows
+# use this to confirm environment variable has been set
+</pre>
+<pre>
+<code><b>Remove-Item env:AWS_PROFILE</b></code>
+
+# removes AWS_PROFILE environment variable from the current session on Windows
+</pre>
+<pre>
+<code><b>export AWS_PROFILE=&lt;aws-profile-name&gt;</b></code>
+
+# sets AWS_PROFILE environment variable on Linux, macOS, or Unix.
+</pre>
+<pre>
+<code><b>aws configure list</b></code>
+
+# outputs the value of AWS_PROFILE environment variable on Linux, macOS, or Unix
+# use this to confirm environment variable has been set
+</pre>
 
 ### DynamoDB
 <pre>
@@ -156,6 +198,13 @@ A collection of cli commands for Shell / PowerShell users
 # describes a specified task or tasks in the specified cluster
 </pre>
 
+### RDS
+<pre>
+<code><b>aws rds describe-db-instances --db-instance-identifier &lt;db-identifier&gt;</b></code>
+
+# Returns information about provisioned RDS instances
+</pre>
+
 ### S3
 <pre>
 <code><b>aws s3api head-bucket --bucket &lt;bucket-name&gt;</b></code>
@@ -177,8 +226,13 @@ A collection of cli commands for Shell / PowerShell users
 
 # lists S3 objects and common prefixes under a prefix or all S3 buckets
 </pre>
+<pre>
+<code><b>aws s3 rm s3://&lt;bucket-name&gt; --recursive</b></code>
 
-### S3
+#  removes all objects from the specified bucket without specifying a prefix
+</pre>
+
+### Secrets Manager
 <pre>
 <code><b>aws secretsmanager list-secrets `
 	--query 'SecretList[?Name==`&lt;secret-name&gt;`].Name'</b></code>
@@ -500,6 +554,18 @@ docker run `
 
 # applies the specific stash by stash name
 </pre>
+<pre>
+<code><b>git reset --hard HEAD</b></code>
+
+# let's you start over the merge if you screwed it up
+</pre>
+<pre>
+<code><b>git reset --hard &lt;your commit hash key&gt;
+</b></code>
+
+# let's you reset your repo back a specified commit
+# use git log to get the hash key of your desired commit
+</pre>
 
 ## JavaScript
 <pre>
@@ -561,21 +627,20 @@ docker run `
 
 # deploys the serverless application to specified region and stage
 </pre>
-
-## Windows (Powershell)
 <pre>
-<code><b>$Env:AWS_PROFILE="&lt;aws-profile-name&gt;"</b></code>
+<code><b>yarn sls remove `
+	--stage dev `
+	--region ap-southeast-2 `
+	--verbose</b></code>
 
-# sets AWS_PROFILE environment variable
+# removes the deployed service, defined in your current working directory
 </pre>
-<pre>
-<code><b>echo $Env:AWS_PROFILE</b></code>
 
-# outputs the value of AWS_PROFILE environment variable
-# use this to confirm environment variable has been set
-</pre>
+## Windows
 <pre>
-<code><b>Remove-Item env:AWS_PROFILE</b></code>
+<code><b>1. netstat -ano | findstr :3000</b>
+<b>2. taskkill /pid &lt;process-id&gt; /F</b></code>
 
-# removes AWS_PROFILE environment variable from the current session
+# finds the id of the process listening on the specified port and kills it
+# /F forcefully terminates the process
 </pre>
